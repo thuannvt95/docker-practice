@@ -18,6 +18,7 @@ pipeline {
         IMAGE_NAME = "node-demo-app-jenkin"
         CONTAINER_NAME = "node-demo-jenkin-container"
         APP_PORT = "3000"
+        CONTAINER_PORT = "4000"
     }
 
     stages {
@@ -46,6 +47,26 @@ pipeline {
                 sh '''
                   cd nodejs-app-starting-setup
                   docker build -t $IMAGE_NAME:${IMAGE_TAG} .
+                '''
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                sh '''
+                  docker stop $CONTAINER_NAME || true
+                  docker rm $CONTAINER_NAME || true
+                '''
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh '''
+                  docker run -d \
+                    --name $CONTAINER_NAME \
+                    -p $CONTAINER_PORT:$APP_PORT \
+                    $IMAGE_NAME
                 '''
             }
         }
