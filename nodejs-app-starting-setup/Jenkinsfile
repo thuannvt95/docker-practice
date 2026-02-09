@@ -16,6 +16,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
+                echo "SCM = ${scm.userRemoteConfigs}"
                 echo "Building branch: ${params.BRANCH_NAME}"
                 echo "Image tag: ${params.IMAGE_TAG}"
                 echo 'Hello World from Jenkins 🚀'
@@ -23,7 +24,13 @@ pipeline {
         }
         stage('Checkout') {
             steps {
-                checkout scm
+                script {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: "*/${params.BRANCH_NAME}"]],
+                        userRemoteConfigs: scm.userRemoteConfigs
+                    ])
+                }
             }
         }
         stage('complete') {
