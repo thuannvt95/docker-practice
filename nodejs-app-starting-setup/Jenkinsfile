@@ -16,6 +16,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
+                echo "SCM = ${scm}"
                 echo "Building branch: ${params.BRANCH_NAME}"
                 echo "Image tag: ${params.IMAGE_TAG}"
                 echo 'Hello World from Jenkins 🚀'
