@@ -6,12 +6,24 @@ pipeline {
             defaultValue: 'develop',
             description: 'Git branch to build'
         )
+        string(
+            name: 'IMAGE_TAG',
+            defaultValue: '0.0.1',
+            description: 'Image tag to build'
+        )
     }
 
     stages {
         stage('Hello') {
             steps {
+                echo "Building branch: ${params.BRANCH_NAME}"
+                echo "Image tag: ${params.IMAGE_TAG}"
                 echo 'Hello World from Jenkins 🚀'
+            }
+        }
+        stage('Checkout') {
+            steps {
+                checkout scm
             }
         }
         stage('complete') {
