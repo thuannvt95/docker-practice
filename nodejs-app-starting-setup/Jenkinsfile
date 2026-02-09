@@ -14,7 +14,6 @@ pipeline {
     }
 
     environment {
-        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         IMAGE_NAME = "node-demo-app-jenkin"
         CONTAINER_NAME = "node-demo-jenkin-container"
         APP_PORT = "3000"
