@@ -1,8 +1,3 @@
-
-stages {
-    stage('Hello') {
-        steps {
-            echo "Test multibranch"
-        }
-    }
+stage('Hello') {
+    echo "Test multibranch"
 }
