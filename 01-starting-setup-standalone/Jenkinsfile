@@ -2,3 +2,11 @@ stage('Build Info') {
     echo "Building branch: ${env.BRANCH_NAME}"
     echo "Image tag: ${params.IMAGE_TAG}"
 }
+
+stage('Build Docker Image') {
+    sh '''
+        cd 01-starting-setup-standalone
+        docker build -t $IMAGE_NAME:${IMAGE_TAG} .
+    '''
+}
+

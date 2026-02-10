@@ -8,6 +8,14 @@ pipeline {
         )
     }
 
+    environment {
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        IMAGE_NAME = "angular-docker-node-multibranch"
+        CONTAINER_NAME = "angular-docker-node-multibranch"
+        APP_PORT = "90"
+        CONTAINER_PORT = "5000"
+    }
+
     stages {
         stage('Run App Pipeline') {
             steps {
