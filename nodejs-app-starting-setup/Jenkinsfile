@@ -13,6 +13,14 @@ pipeline {
         )
     }
 
+    environment {
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        IMAGE_NAME = "node-demo-app-jenkin"
+        CONTAINER_NAME = "node-demo-jenkin-container"
+        APP_PORT = "80"
+        CONTAINER_PORT = "4000"
+    }
+
     stages {
         stage('Hello') {
             steps {
@@ -33,6 +41,36 @@ pipeline {
                 }
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                  cd nodejs-app-starting-setup
+                  docker build -t $IMAGE_NAME:${IMAGE_TAG} .
+                '''
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                sh '''
+                  docker stop $CONTAINER_NAME || true
+                  docker rm $CONTAINER_NAME || true
+                '''
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh '''
+                  docker run -d \
+                    --name $CONTAINER_NAME \
+                    -p $CONTAINER_PORT:$APP_PORT \
+                    $IMAGE_NAME:$IMAGE_TAG
+                '''
+            }
+        }
+
         stage('complete') {
             steps {
                 echo 'Complete build'

@@ -1,0 +1,26 @@
+stage('Build Info') {
+    echo "Building branch: ${env.BRANCH_NAME}"
+    echo "Image tag: ${params.IMAGE_TAG}"
+}
+
+stage('Build Docker Image') {
+    sh '''
+        docker build -t $IMAGE_NAME:${IMAGE_TAG} .
+    '''
+}
+
+stage('Stop Old Container') {
+    sh '''
+            docker stop $CONTAINER_NAME || true
+            docker rm $CONTAINER_NAME || true
+        '''
+}
+
+stage('Run Container') {
+    sh '''
+            docker run -d \
+            --name $CONTAINER_NAME \
+            -p $CONTAINER_PORT:$APP_PORT \
+            $IMAGE_NAME:$IMAGE_TAG
+        '''
+}
