@@ -1,3 +1,10 @@
+parameters {
+    string(
+        name: 'IMAGE_TAG',
+        defaultValue: '0.0.1',
+        description: 'Image tag to build'
+    )
+}
 stage('Hello') {
     echo "Test multibranch"
 }
