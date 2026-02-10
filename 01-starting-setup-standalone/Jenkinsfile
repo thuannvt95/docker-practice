@@ -5,8 +5,6 @@ stage('Build Info') {
 
 stage('Build Docker Image') {
     sh '''
-        cd 01-starting-setup-standalone
         docker build -t $IMAGE_NAME:${IMAGE_TAG} .
     '''
 }
-
