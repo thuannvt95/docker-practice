@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Run App Pipeline') {
             steps {
-                dir('project2') {
-                    load '01-starting-setup-standalone/Jenkinsfile'
+                dir('01-starting-setup-standalone') {
+                    load 'Jenkinsfile'
                 }
             }
         }
