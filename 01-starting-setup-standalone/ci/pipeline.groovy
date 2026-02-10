@@ -13,7 +13,7 @@ pipeline {
         IMAGE_NAME = "angular-docker-node-multibranch"
         CONTAINER_NAME = "angular-docker-node-multibranch"
         APP_PORT = "80"
-        CONTAINER_PORT = "6000"
+        CONTAINER_PORT = "4100"
     }
 
     stages {

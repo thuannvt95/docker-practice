@@ -31,7 +31,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy build output
 COPY --from=build /app/dist/ngrx-intro-standalone /usr/share/nginx/html
 
-EXPOSE 90
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
 
