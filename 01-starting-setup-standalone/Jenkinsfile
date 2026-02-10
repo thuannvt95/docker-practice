@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    parameters {
+        string(
+            name: 'IMAGE_TAG',
+            defaultValue: '0.0.1',
+            description: 'Image tag to build'
+        )
+    }
+
+    environment {
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        IMAGE_NAME = "node-demo-app-jenkin"
+        CONTAINER_NAME = "node-demo-jenkin-container"
+        APP_PORT = "80"
+        CONTAINER_PORT = "4000"
+    }
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo "Test multibranch"
+            }
+        }
+    }
+}
