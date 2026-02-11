@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-demo
+  template:
+    metadata:
+      labels:
+        app: node-demo
+    spec:
+      containers:
+        - name: node-demo
+          image: node-k8s-demo
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
